@@ -1,219 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estructuras de datos</title>
-    
-    <style>
-        /* Oculta la pantalla 2 por defecto a la hora de actualizar la página*/
-        .pantalla {
-            display: none;
-        }
-        /*Aquí podemos cambiar los colores, tamaño y diseño del fondo*/
-        body {
-        font-family: Arial, sans-serif;
-        background-color: #051d5f;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        }
-        /*Este es el cuadro que tiene el texto "Escoja el tipo de estructura de datos" donde podemos realizar
-        modificaciones como tamaño, color de fondo, alinear el texto*/
-        .container1 {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 450px;
-        }
-        /*Aquí esto podemos modificar el botón "pila"*/
-        .controls1 button {
-        background-color: #53628a73;
-        padding: 10px;
-        border-radius: 10px;
-        
-        }
-    </style>
-    
-    <style>
-        /*Este es el cuadro que tiene el texto "Estructura de datos - pilas" donde podemos realizar
-        modificaciones como tamaño, color de fondo, alinear el texto*/
-        .container2 {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 450px;
-        }
-        /*Aquí podemos modificar los botones, como el tamaño, color, 
-        bordes, etc... pertenecientes a "Insertar", "Eliminar", "Mostrar" */
-        .controls2 button {
-        background-color: #53628a73;
-        padding: 5px;
-        border-radius: 10px;
-        }
-        /*Aquí podemos modificar el botón de "regresar" donde se puede cmbiar el tamaño, color, bordes, etc...*/
-        .controlsR button {
-           background-color: rgb(240, 248, 255);
-           padding: 5px;
-          border-radius: 10px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pila - Proyecto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #051d5f;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        .output {
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 500px;
+    }
+
+    .pilab {
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #092a4d;
+      color: white;
+      border: 10px;
+      cursor: pointer;
+    }
+
+    .controls input {
+      padding: 10px;
+      width: 30%;
+      margin-right: 10px;
+    }
+
+    .controls button {
+      padding: 10px;
+      background-color: #092a4d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      background-color: #092a4d;
+    }
+
+    .output {
       margin-top: 20px;
-      }
-      
-      .controls2 input {
-        padding: 10px;
-        width: 40%;
-        margin-right: 10px;
-      }
+      display: none; /* Oculto por defecto */
+    }
 
-      #pila-estado {
-        border: 1px solid #ccc;
-        padding: 10px;
-        min-height: 80px;
-        max-height: 150px;
-        background-color: #f9f9f9;
-        display: flex;
-        align-items: flex-end; /* Alinea los elementos al fondo */
-        justify-content: flex-start; /* Alinea elementos al inicio (izquierda) */
-        overflow-x: auto; /* Permite el desplazamiento horizontal */
-      }
+    #pila-estado {
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 80px;
+      max-height: 150px;
+      background-color: #f9f9f9;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow-x: auto;
+    }
 
-      .bloque {
-        width: 62px;
-        height: 70px;
-        margin: 5px;
-        background-color: #007BFF;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-        font-size: 1.2rem;
-      }
+    .bloque {
+      width: 60px;
+      height: 70px;
+      margin: 5px;
+      background-color: #007BFF;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
 
-      p {
-        font-size: 1rem;
-        color: red;
-      }
+    p {
+      font-size: 1rem;
+      color: red;
+    }
 
-    </style>
-     
+    #pantalla2 {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    
-    <div id="pantalla1" class="pantalla" style="display: block;">
-        <div class="container1">
-            <h1>¡Bievenido!</h1>
-            <h2>Escoja el tipo de Estructura de datos</h2>
-            <div class="controls1">
-                <button onclick="mostrarPantalla('pantalla2')">Pila</button>
-            </div>
-        </div>
+  <!-- Primera pantalla para seleccionar el tipo de estructura -->
+  <div class="container" id="pantalla1">
+    <h1>Bienvenido</h1>
+    <h2>Escoja el tipo de estructura de datos</h2>
+    <button class="pilab" onclick="mostrarPila()">Pila</button>
+  </div>
+
+  <!-- Segunda pantalla que contiene la pila -->
+  <div class="container" id="pantalla2">
+    <h1>Estructura de Datos - PILA</h1>
+    <div class="controls">
+      <input type="text" id="value" placeholder="Ingrese un número (1-99)">
+      <button onclick="insertar()">Insertar</button>
+      <button onclick="eliminar()">Eliminar</button>
+      <button id="togglePila" onclick="toggleMostrarPila()">Mostrar Pila</button>
     </div>
+    <div class="output" id="output-pila">
+      <h2>Estado de la Pila:</h2>
+      <div id="pila-estado"></div>
+      <p id="mensaje"></p>
+      <p id="confirmacion" style="color: green;"></p> <!-- Mensaje de confirmación -->
+    </div>
+    <button onclick="regresar()">Regresar</button> <!-- Botón para regresar -->
+  </div>
 
-    <div id="pantalla2" class="pantalla">
-        <div class="container2">
-            <h1>Estructura de Datos - PILA</h1>
-            <div class="controls2">
-              <input type="number" id="value" placeholder="Ingrese un número (1-99)" min="1" max="99">
-              <button onclick="insertar()">Insertar</button>
-              <button onclick="eliminar()">Eliminar</button>
-              <button onclick="mostrar()">Mostrar</button>
-            </div>
-           
-            <div class="output">
-              <h2>Estado de la Pila:</h2>
-              <div id="pila-estado"></div>
-              <p id="mensaje"></p>
-            </div>
-        </div>
-            <div class="controlsR">
-            <button onclick="mostrarPantalla('pantalla1')">Regresar</button>
-            </div>
-    </div>    
+  <script>
+    // Función para mostrar la segunda pantalla (Pila)
+    function mostrarPila() {
+      document.getElementById('pantalla1').style.display = 'none';
+      document.getElementById('pantalla2').style.display = 'block';
+    }
 
-    <script>
-            function mostrarPantalla(pantallaID) {
-                // Oculta todas las pantallas
-                document.querySelectorAll('.pantalla').forEach(function(pantalla) {
-                    pantalla.style.display = 'none';
-                });
-                
-                // Muestra la pantalla seleccionada
-                document.getElementById(pantallaID).style.display = 'block';
-            }
-      </script>
+    // Función para regresar a la primera pantalla
+    function regresar() {
+      document.getElementById('pantalla2').style.display = 'none';
+      document.getElementById('pantalla1').style.display = 'block';
+    }
 
-      <script>
-      // Inicializamos la pila y la variable que controla el tope (CIMA)
-      let pila = [];
-      const maxSize = 6;
-      const pilaEstado = document.getElementById('pila-estado');
-      const mensaje = document.getElementById('mensaje');
+    // Inicializamos la pila y la variable que controla el tope (CIMA)
+    let pila = [];
+    const maxSize = 6;
+    const pilaEstado = document.getElementById('pila-estado');
+    const mensaje = document.getElementById('mensaje');
+    const confirmacion = document.getElementById('confirmacion'); // Elemento para mostrar confirmación
+    let pilaVisible = false; // Para controlar si la pila está visible o no
 
-      // Función para insertar en la pila
-      function insertar() {
-        const valor = parseInt(document.getElementById('value').value);
+    // Función para insertar en la pila
+    function insertar() {
+      const valor = document.getElementById('value').value;
 
-        // Validación de entrada
-        if (isNaN(valor) || valor < 1 || valor > 99) {
-          mensaje.textContent = "Ingrese un número válido entre 1 y 99.";
-          return;
-        }
-
-        if (pila.length < maxSize) {
-          pila.push(valor);
-          mensaje.textContent = `Valor ${valor} insertado correctamente.`;
-          document.getElementById('value').value = ""; // Limpiar input
-        } else {
-          mensaje.textContent = "La pila está llena. No se pueden insertar más elementos.";
-        }
-
-        mostrar();
+      // Validación: Solo aceptar números enteros entre 1 y 99
+      if (!/^\d+$/.test(valor) || parseInt(valor) < 1 || parseInt(valor) > 99) {
+        mensaje.textContent = "Solo introduzca números enteros entre 1 y 99.";
+        confirmacion.textContent = ""; // Limpiar mensaje de confirmación si hay error
+        return;
       }
 
-      // Función para eliminar de la pila
-      function eliminar() {
-        if (pila.length > 0) {
-          const eliminado = pila.pop();
-          mensaje.textContent = `Valor ${eliminado} eliminado correctamente.`;
-        } else {
-          mensaje.textContent = "La pila está vacía. No hay elementos para eliminar.";
-        }
+      if (pila.length < maxSize) {
+        pila.push(parseInt(valor));
+        confirmacion.textContent = "Se introdujo correctamente."; // Mostrar mensaje de confirmación
+        mensaje.textContent = ""; // Limpiar mensaje anterior
+        document.getElementById('value').value = ""; // Limpiar input
 
-        mostrar();
+        // Mostrar la pila si está visible
+        if (pilaVisible) {
+          mostrar();
+        }
+      } else {
+        mensaje.textContent = "La pila está llena. No se pueden insertar más elementos.";
+        confirmacion.textContent = ""; // Limpiar mensaje de confirmación si la pila está llena
+      }
+    }
+
+    // Función para eliminar de la pila
+    function eliminar() {
+      if (pila.length > 0) {
+        const eliminado = pila.pop();
+        mensaje.textContent = `Valor ${eliminado} eliminado correctamente.`;
+        confirmacion.textContent = ""; // Limpiar mensaje de confirmación
+
+        // Siempre mostrar confirmación después de eliminar
+        confirmacion.textContent = "Elemento eliminado correctamente."; // Confirmación para la eliminación
+
+        // Si la pila está visible, mostrar el nuevo estado
+        if (pilaVisible) {
+          mostrar();
+        }
+      } else {
+        mensaje.textContent = "La pila está vacía. No hay elementos para eliminar.";
+        confirmacion.textContent = ""; // Limpiar mensaje de confirmación si no hay elementos
+      }
+    }
+
+    // Función para mostrar el estado de la pila
+    function mostrar() {
+      pilaEstado.innerHTML = ""; // Limpiar el contenido actual
+
+      // Mostrar elementos de la pila como bloques visuales
+      pila.forEach((elemento) => {
+        const div = document.createElement('div');
+        div.classList.add('bloque');
+        div.textContent = elemento;
+        pilaEstado.appendChild(div);
+      });
+
+      if (pila.length === 0) {
+        mensaje.textContent = "La pila está vacía.";
+      } else if (pila.length === maxSize) {
+        mensaje.textContent = "La pila está llena.";
+      } else {
+        mensaje.textContent = `CIMA: ${pila[pila.length - 1]}`;
+      }
+    }
+
+    // Función para alternar entre mostrar y ocultar la pila
+    function toggleMostrarPila() {
+      const outputPila = document.getElementById('output-pila');
+      const toggleButton = document.getElementById('togglePila');
+
+      if (pilaVisible) {
+        outputPila.style.display = 'none';
+        toggleButton.textContent = 'Mostrar Pila';
+      } else {
+        outputPila.style.display = 'block';
+        toggleButton.textContent = 'Ocultar Pila';
+        mostrar(); // Mostrar el estado de la pila al hacerla visible
       }
 
-      // Función para mostrar el estado de la pila
-      function mostrar() {
-        pilaEstado.innerHTML = ""; // Limpiar el contenido actual
-
-        // Mostrar elementos de la pila como bloques visuales
-        pila.forEach((elemento) => {
-          const div = document.createElement('div');
-          div.classList.add('bloque');
-          div.textContent = elemento;
-          pilaEstado.appendChild(div);
-        });
-
-        if (pila.length === 0) {
-          mensaje.textContent = "La pila está vacía.";
-        } else if (pila.length === maxSize) {
-          mensaje.textContent = "La pila está llena.";
-        } else {
-          mensaje.textContent = `CIMA: ${pila[pila.length - 1]}`;
-        }
-      }
-      </script>
-
+      pilaVisible = !pilaVisible; // Cambiar el estado de visibilidad
+    }
+  </script>
 </body>
 </html>
